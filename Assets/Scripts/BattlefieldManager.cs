@@ -20,15 +20,6 @@ public class BattlefieldManager : MonoBehaviour {
         //DontDestroyOnLoad(gameObject);
     }
 
-    void Start() {
-
-    }
-
-    // Update is called once per frame
-    void Update() {
-
-    }
-
     public bool AddUnit(Unit unit, int x, int y) {
         if ((x < 0) || (x >= width) || (y < 0) || (y >= height)) {
             Debug.LogWarning("AddUnit: Position out of bounds.");
