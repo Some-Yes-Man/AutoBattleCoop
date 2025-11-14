@@ -1,13 +1,7 @@
+using DefaultNamespace;
 using UnityEngine;
 
-public class Unit : MonoBehaviour {
-
-    void Start() {
-
-    }
-
-    void Update() {
-
-    }
-
+public class Unit : MonoBehaviour
+{
+    public EUnitFraction fraction;
 }
