@@ -81,31 +81,45 @@ public class BattlefieldManager : MonoBehaviour {
         }
     }
 
-    public IEnumerable<Unit> GetUnitsInPattern(int originX, int originY, EAttackPattern attackPattern, int attackDistance, EDirection direction) {
-        bool[,] pattern = GeneratePatternMap(attackPattern, attackDistance);
-
-        for (int px = 0; px < pattern.GetLength(0); px++) {
-            for (int py = 0; py < pattern.GetLength(1); py++) {
+    public IEnumerable<Unit> GetUnitsInPattern(int originX, int originY, bool[,] pattern, EDirection direction) {
+        for (int py = 0; py < pattern.GetLength(1); py++) {
+            for (int px = 0; px < pattern.GetLength(0); px++) {
                 if (!pattern[px, py]) continue;
 
                 int targetX;
                 int targetY;
                 switch (direction) {
                     case EDirection.Right:
-                        targetX = originX + px;
-                        targetY = originY + py;
+                        if (pattern.GetLength(1) % 2 == 0) {
+                            Debug.LogWarning("GetUnitsInPattern: Right direction requires odd-sized pattern height.");
+                            yield break;
+                        }
+                        targetX = originX + px + 1;
+                        targetY = originY + py - (pattern.GetLength(1) / 2);
                         break;
                     case EDirection.Left:
-                        targetX = originX - px;
-                        targetY = originY - py;
+                        if (pattern.GetLength(0) % 2 == 0) {
+                            Debug.LogWarning("GetUnitsInPattern: Left direction requires odd-sized pattern width.");
+                            yield break;
+                        }
+                        targetX = originX - px - 1;
+                        targetY = originY - py + (pattern.GetLength(0) / 2);
                         break;
                     case EDirection.Up:
-                        targetX = originX + py;
-                        targetY = originY - px;
+                        targetX = originX + py - (pattern.GetLength(0) / 2);
+                        targetY = originY - px - 1;
                         break;
                     case EDirection.Down:
-                        targetX = originX - py;
-                        targetY = originY + px;
+                        targetX = originX - py + (pattern.GetLength(0) / 2);
+                        targetY = originY + px + 1;
+                        break;
+                    case EDirection.Center:
+                        if (pattern.GetLength(0) % 2 == 0 || pattern.GetLength(1) % 2 == 0) {
+                            Debug.LogWarning("GetUnitsInPattern: Center direction requires odd-sized pattern.");
+                            yield break;
+                        }
+                        targetX = originX + px - (pattern.GetLength(0) / 2);
+                        targetY = originY + py - (pattern.GetLength(1) / 2);
                         break;
                     default:
                         Debug.LogWarning("GetUnitsInPattern: Unknown direction.");
@@ -113,6 +127,7 @@ public class BattlefieldManager : MonoBehaviour {
                 }
 
                 if ((targetX >= 0) && (targetX < width) && (targetY >= 0) && (targetY < height)) {
+                    Debug.Log($"GetUnitsInPattern: Checking target=({targetX},{targetY})");
                     Unit unit = battlefield[targetX, targetY];
                     if (unit != null) {
                         yield return unit;
