@@ -3,12 +3,14 @@ using DefaultNamespace;
 using UnityEngine;
 using System.Linq;
 
+// just holds units and informs the battlefieldManager if someone died after evaluation 
+
 public class UnitManager : MonoBehaviour
 {
     public static UnitManager Instance;
-    private HashSet<Unit> units;
+    private readonly HashSet<Unit> units = new ();
     private BattlefieldManager battlefieldManager;
-
+    
     private void Awake()
     {
         Debug.Log("UnitManager Awake");
@@ -32,7 +34,7 @@ public class UnitManager : MonoBehaviour
         Debug.Log("UnitManager Started.");
     }
 
-    void RemoveUnit(Unit unit)
+    public void RemoveUnit(Unit unit)
     {
         Debug.Log("Removed Unit.");
         units.Remove(unit);
@@ -42,18 +44,18 @@ public class UnitManager : MonoBehaviour
         }
     }
 
-    void AddUnit(Unit unit)
+    public void AddUnit(Unit unit)
     {
         Debug.Log("Added Unit.");
         units.Add(unit);
     }
     
-    IEnumerable<Unit> GetUnitsInFraction(EUnitFraction fraction)
+    public IEnumerable<Unit> GetUnitsInFraction(EUnitFraction fraction)
     {
         return units.Where(x => x.fraction == fraction).ToList();
     }
 
-    HashSet<Unit> GetAllUnits()
+    public HashSet<Unit> GetAllUnits()
     {
         return units;
     }
