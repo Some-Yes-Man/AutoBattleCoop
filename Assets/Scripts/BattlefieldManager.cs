@@ -127,26 +127,12 @@ public class BattlefieldManager : MonoBehaviour {
                 }
 
                 if ((targetX >= 0) && (targetX < width) && (targetY >= 0) && (targetY < height)) {
-                    Debug.Log($"GetUnitsInPattern: Checking target=({targetX},{targetY})");
                     Unit unit = battlefield[targetX, targetY];
                     if (unit != null) {
                         yield return unit;
                     }
                 }
             }
-        }
-    }
-
-    // FIXME : this should probably live somewhere else
-    private bool[,] GeneratePatternMap(EAttackPattern attackPattern, int attackDistance) {
-        switch (attackPattern) {
-            case EAttackPattern.Neighbor:
-                return new bool[,] {
-                    { true }
-                };
-            default:
-                Debug.LogWarning("GeneratePatternMap: Unknown attack pattern.");
-                return new bool[0, 0];
         }
     }
 
