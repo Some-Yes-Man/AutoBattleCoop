@@ -1,7 +1,9 @@
-public enum EDirection {
-    Up,
-    Down,
-    Left,
-    Right,
-    Center
+namespace AutoBattleCoop {
+    public enum EDirection {
+        Up,
+        Down,
+        Left,
+        Right,
+        Center
+    }
 }

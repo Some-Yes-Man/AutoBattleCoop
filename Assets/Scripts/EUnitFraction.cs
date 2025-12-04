@@ -1,7 +1,5 @@
-namespace DefaultNamespace
-{
-    public enum EUnitFraction
-    {
+namespace AutoBattleCoop {
+    public enum EUnitFraction {
         Unknown,
         Neutral,
         TeamA,

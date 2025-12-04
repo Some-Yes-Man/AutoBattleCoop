@@ -1,7 +1,9 @@
-using DefaultNamespace;
 using UnityEngine;
 
-public class Unit : MonoBehaviour
-{
-    public EUnitFraction fraction;
+namespace AutoBattleCoop {
+    public class Unit : MonoBehaviour {
+
+        public EUnitFraction fraction;
+
+    }
 }
