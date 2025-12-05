@@ -1,5 +1,5 @@
 namespace AutoBattleCoop {
-    public enum EUnitFraction {
+    public enum EUnitFaction {
         Unknown,
         Neutral,
         TeamA,

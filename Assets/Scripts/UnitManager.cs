@@ -42,8 +42,8 @@ namespace AutoBattleCoop {
             units.Add(unit);
         }
 
-        public IEnumerable<Unit> GetUnitsInFraction(EUnitFraction fraction) {
-            return units.Where(x => x.fraction == fraction).ToList();
+        public IEnumerable<Unit> GetUnitsInFraction(EUnitFaction faction) {
+            return units.Where(x => x.Faction == faction).ToList();
         }
 
         public HashSet<Unit> GetAllUnits() {

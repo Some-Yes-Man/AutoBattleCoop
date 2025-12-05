@@ -8,7 +8,7 @@ namespace AutoBattleCoop {
         public void AddUnit_EmptyPositionInsideBounds_ReturnsTrue() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit = new GameObject().AddComponent<Unit>();
+            var unit = new GameObject().AddComponent<TestUnit>();
             // Act
             bool result = battlefieldManager.AddUnit(unit, 5, 5);
             // Assert
@@ -19,7 +19,7 @@ namespace AutoBattleCoop {
         public void AddUnit_AfterRemovingUnit_ReturnsTrue() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit = new GameObject().AddComponent<Unit>();
+            var unit = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit, 5, 5);
             battlefieldManager.RemoveUnit(unit);
             // Act
@@ -32,8 +32,8 @@ namespace AutoBattleCoop {
         public void AddUnit_OccupiedPosition_ReturnsFalse() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 5, 5);
             // Act
             bool result = battlefieldManager.AddUnit(unit2, 5, 5);
@@ -45,7 +45,7 @@ namespace AutoBattleCoop {
         public void AddUnit_OutOfBoundsPosition_ReturnsFalse() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit = new GameObject().AddComponent<Unit>();
+            var unit = new GameObject().AddComponent<TestUnit>();
             // Act
             bool result = battlefieldManager.AddUnit(unit, 9999, 9999);
             // Assert
@@ -56,7 +56,7 @@ namespace AutoBattleCoop {
         public void ClearCoordinate_OccupiedPosition_ReturnsTrue() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit = new GameObject().AddComponent<Unit>();
+            var unit = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit, 5, 5);
             // Act
             bool result = battlefieldManager.ClearCoordinate(5, 5);
@@ -88,7 +88,7 @@ namespace AutoBattleCoop {
         public void RemoveUnit_ExistingUnit_ReturnsTrue() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit = new GameObject().AddComponent<Unit>();
+            var unit = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit, 5, 5);
             // Act
             bool result = battlefieldManager.RemoveUnit(unit);
@@ -100,7 +100,7 @@ namespace AutoBattleCoop {
         public void RemoveUnit_NonExistingUnit_ReturnsFalse() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit = new GameObject().AddComponent<Unit>();
+            var unit = new GameObject().AddComponent<TestUnit>();
             // Act
             bool result = battlefieldManager.RemoveUnit(unit);
             // Assert
@@ -111,7 +111,7 @@ namespace AutoBattleCoop {
         public void RemoveUnit_AfterClearingCoordinate_ReturnsFalse() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit = new GameObject().AddComponent<Unit>();
+            var unit = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit, 5, 5);
             battlefieldManager.ClearCoordinate(5, 5);
             // Act
@@ -124,7 +124,7 @@ namespace AutoBattleCoop {
         public void GetUnitAt_ExistingUnit_ReturnsUnit() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit = new GameObject().AddComponent<Unit>();
+            var unit = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit, 5, 5);
             // Act
             var retrievedUnit = battlefieldManager.GetUnitAt(5, 5);
@@ -156,8 +156,8 @@ namespace AutoBattleCoop {
         public void GetAllUnits_ReturnsAllAddedUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 2, 3);
             battlefieldManager.AddUnit(unit2, 4, 5);
             // Act
@@ -170,8 +170,8 @@ namespace AutoBattleCoop {
         public void GetAllUnits_AfterRemovingUnit_ReturnsRemainingUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 2, 3);
             battlefieldManager.AddUnit(unit2, 4, 5);
             battlefieldManager.RemoveUnit(unit1);
@@ -203,8 +203,8 @@ namespace AutoBattleCoop {
         public void ClearBattlefield_WithUnits_ClearsAllUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 2, 3);
             battlefieldManager.AddUnit(unit2, 4, 5);
             // Act
@@ -245,8 +245,8 @@ namespace AutoBattleCoop {
         public void GetUnitsInPattern_PatternInBoundsAndUnitsInPattern_ReturnsCorrectUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 7, 4);
             battlefieldManager.AddUnit(unit2, 8, 6);
             var pattern = Transpose(new bool[,] {
@@ -279,8 +279,8 @@ namespace AutoBattleCoop {
         public void GetUnitsInPattern_PatternOutOfBoundsAndUnitsInPattern_ReturnsCorrectUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 9, 4);
             battlefieldManager.AddUnit(unit2, 9, 6);
             var pattern = Transpose(new bool[,] {
@@ -298,8 +298,8 @@ namespace AutoBattleCoop {
         public void GetUnitsInPattern_PatternDirectionLeftAndUnitsInPattern_ReturnsCorrectUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 3, 6);
             battlefieldManager.AddUnit(unit2, 2, 4);
             var pattern = Transpose(new bool[,] {
@@ -317,8 +317,8 @@ namespace AutoBattleCoop {
         public void GetUnitsInPattern_PatternDirectionUpAndUnitsInPattern_ReturnsCorrectUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 4, 3);
             battlefieldManager.AddUnit(unit2, 6, 2);
             var pattern = Transpose(new bool[,] {
@@ -336,8 +336,8 @@ namespace AutoBattleCoop {
         public void GetUnitsInPattern_PatternDirectionDownAndUnitsInPattern_ReturnsCorrectUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 4, 8);
             battlefieldManager.AddUnit(unit2, 6, 7);
             var pattern = Transpose(new bool[,] {
@@ -355,7 +355,7 @@ namespace AutoBattleCoop {
         public void GetUnitsInPattern_PatternDirectionCenterAndEvenSizedPattern_ReturnsEmptyCollection() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 5, 5);
             var pattern = new bool[,] {
             { true, true },
@@ -371,9 +371,9 @@ namespace AutoBattleCoop {
         public void GetUnitsInPattern_PatternDirectionCenterAndUnitsInPattern_ReturnsCorrectUnits() {
             // Arrange
             var battlefieldManager = new GameObject().AddComponent<BattlefieldManager>();
-            var unit1 = new GameObject().AddComponent<Unit>();
-            var unit2 = new GameObject().AddComponent<Unit>();
-            var unit3 = new GameObject().AddComponent<Unit>();
+            var unit1 = new GameObject().AddComponent<TestUnit>();
+            var unit2 = new GameObject().AddComponent<TestUnit>();
+            var unit3 = new GameObject().AddComponent<TestUnit>();
             battlefieldManager.AddUnit(unit1, 4, 4);
             battlefieldManager.AddUnit(unit2, 5, 5);
             battlefieldManager.AddUnit(unit3, 6, 6);
