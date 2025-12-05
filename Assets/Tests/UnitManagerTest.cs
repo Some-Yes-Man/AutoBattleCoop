@@ -32,13 +32,13 @@ namespace AutoBattleCoop {
         public void GetUnitsInFraction_When_Fraction() {
             UnitManager unitManager = new GameObject().AddComponent<UnitManager>();
             var unit1 = new GameObject().AddComponent<TestUnit>();
-            unit1.respecTestUnit(0,0,0,EUnitFaction.Neutral);
+            unit1.RespecTestUnit(0, 0, 0, EUnitFaction.Neutral);
             var unit2 = new GameObject().AddComponent<TestUnit>();
-            unit2.respecTestUnit(0,0,0,EUnitFaction.TeamA);
+            unit2.RespecTestUnit(0, 0, 0, EUnitFaction.TeamA);
             var unit3 = new GameObject().AddComponent<TestUnit>();
-            unit3.respecTestUnit(0,0,0,EUnitFaction.TeamB);
+            unit3.RespecTestUnit(0, 0, 0, EUnitFaction.TeamB);
             var unit4 = new GameObject().AddComponent<TestUnit>();
-            unit4.respecTestUnit(0,0,0,EUnitFaction.TeamA);
+            unit4.RespecTestUnit(0, 0, 0, EUnitFaction.TeamA);
             unitManager.AddUnit(unit1);
             unitManager.AddUnit(unit2);
             unitManager.AddUnit(unit3);

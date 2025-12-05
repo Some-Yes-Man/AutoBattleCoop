@@ -6,10 +6,12 @@ namespace AutoBattleCoop {
 
         public static BattlefieldManager Instance;
 
-        private const int width = 10;
-        private const int height = 10;
+        [field: SerializeField]
+        public int Width { get; private set; } = 10;
+        [field: SerializeField]
+        public int Height { get; private set; } = 10;
 
-        private readonly Unit[,] battlefield = new Unit[width, height];
+        private AbstractUnit[,] battlefield;
 
         void Awake() {
             Debug.Log("BattlefieldManager Awake");
@@ -18,11 +20,13 @@ namespace AutoBattleCoop {
             }
             Instance = this;
 
+            battlefield = new AbstractUnit[Width, Height];
+
             //DontDestroyOnLoad(gameObject);
         }
 
-        public bool AddUnit(Unit unit, int x, int y) {
-            if ((x < 0) || (x >= width) || (y < 0) || (y >= height)) {
+        public bool AddUnit(AbstractUnit unit, int x, int y) {
+            if ((x < 0) || (x >= Width) || (y < 0) || (y >= Height)) {
                 Debug.LogWarning("AddUnit: Position out of bounds.");
                 return false;
             }
@@ -37,7 +41,7 @@ namespace AutoBattleCoop {
         }
 
         public bool ClearCoordinate(int x, int y) {
-            if ((x < 0) || (x >= width) || (y < 0) || (y >= height)) {
+            if ((x < 0) || (x >= Width) || (y < 0) || (y >= Height)) {
                 Debug.LogWarning("RemoveUnit: Position out of bounds.");
                 return false;
             }
@@ -50,9 +54,9 @@ namespace AutoBattleCoop {
             return true;
         }
 
-        public bool RemoveUnit(Unit unit) {
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
+        public bool RemoveUnit(AbstractUnit unit) {
+            for (int x = 0; x < Width; x++) {
+                for (int y = 0; y < Height; y++) {
                     if (battlefield[x, y] == unit) {
                         battlefield[x, y] = null;
                         return true;
@@ -63,8 +67,8 @@ namespace AutoBattleCoop {
             return false;
         }
 
-        public Unit GetUnitAt(int x, int y) {
-            if ((x < 0) || (x >= width) || (y < 0) || (y >= height)) {
+        public AbstractUnit GetUnitAt(int x, int y) {
+            if ((x < 0) || (x >= Width) || (y < 0) || (y >= Height)) {
                 Debug.LogWarning("GetUnitAt: Position out of bounds.");
                 return null;
             }
@@ -72,9 +76,9 @@ namespace AutoBattleCoop {
             return battlefield[x, y];
         }
 
-        public IEnumerable<Unit> GetAllUnits() {
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
+        public IEnumerable<AbstractUnit> GetAllUnits() {
+            for (int x = 0; x < Width; x++) {
+                for (int y = 0; y < Height; y++) {
                     if (battlefield[x, y] != null) {
                         yield return battlefield[x, y];
                     }
@@ -82,7 +86,7 @@ namespace AutoBattleCoop {
             }
         }
 
-        public IEnumerable<Unit> GetUnitsInPattern(int originX, int originY, bool[,] pattern, EDirection direction) {
+        public IEnumerable<AbstractUnit> GetUnitsInPattern(int originX, int originY, bool[,] pattern, EDirection direction) {
             for (int py = 0; py < pattern.GetLength(1); py++) {
                 for (int px = 0; px < pattern.GetLength(0); px++) {
                     if (!pattern[px, py]) continue;
@@ -127,8 +131,8 @@ namespace AutoBattleCoop {
                             yield break;
                     }
 
-                    if ((targetX >= 0) && (targetX < width) && (targetY >= 0) && (targetY < height)) {
-                        Unit unit = battlefield[targetX, targetY];
+                    if ((targetX >= 0) && (targetX < Width) && (targetY >= 0) && (targetY < Height)) {
+                        AbstractUnit unit = battlefield[targetX, targetY];
                         if (unit != null) {
                             yield return unit;
                         }
@@ -138,8 +142,8 @@ namespace AutoBattleCoop {
         }
 
         public void ClearBattlefield() {
-            for (int x = 0; x < width; x++) {
-                for (int y = 0; y < height; y++) {
+            for (int x = 0; x < Width; x++) {
+                for (int y = 0; y < Height; y++) {
                     battlefield[x, y] = null;
                 }
             }

@@ -7,7 +7,7 @@ namespace AutoBattleCoop {
     public class UnitManager : MonoBehaviour {
 
         public static UnitManager Instance;
-        private readonly HashSet<Unit> units = new();
+        private readonly HashSet<AbstractUnit> units = new();
         private BattlefieldManager battlefieldManager;
 
         private void Awake() {
@@ -29,7 +29,7 @@ namespace AutoBattleCoop {
             Debug.Log("UnitManager Started.");
         }
 
-        public void RemoveUnit(Unit unit) {
+        public void RemoveUnit(AbstractUnit unit) {
             Debug.Log("Removed Unit.");
             units.Remove(unit);
             if (battlefieldManager != null) {
@@ -37,16 +37,16 @@ namespace AutoBattleCoop {
             }
         }
 
-        public void AddUnit(Unit unit) {
+        public void AddUnit(AbstractUnit unit) {
             Debug.Log("Added Unit.");
             units.Add(unit);
         }
 
-        public IEnumerable<Unit> GetUnitsInFraction(EUnitFaction faction) {
+        public IEnumerable<AbstractUnit> GetUnitsInFraction(EUnitFaction faction) {
             return units.Where(x => x.Faction == faction).ToList();
         }
 
-        public HashSet<Unit> GetAllUnits() {
+        public HashSet<AbstractUnit> GetAllUnits() {
             return units;
         }
 
