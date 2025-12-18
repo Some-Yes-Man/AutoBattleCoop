@@ -14,6 +14,9 @@ namespace AutoBattleCoop {
 
         public EUnitFaction Faction { get; protected set; } = EUnitFaction.Unknown;
 
-    }
+        public void ApplyDamage(int damage, EDamageType damageType) {
 
+        }
+
+    }
 }

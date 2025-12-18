@@ -1,0 +1,4 @@
+﻿<Solution>
+  <Project Path="AutoBattleCoop.csproj" />
+  <Project Path="Tests.csproj" />
+</Solution>
