@@ -1,9 +1,9 @@
+using AutoBattleCoop.Assets.Scripts.Effects;
 using System;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace AutoBattleCoop {
-    public abstract class AbstractUnit : MonoBehaviour {
+    public abstract class AbstractUnit : MonoBehaviour, IDamageResolver {
 
         [field: SerializeField]
         public int HitPoints { get; protected set; }
@@ -13,45 +13,38 @@ namespace AutoBattleCoop {
 
         public EUnitFaction Faction { get; protected set; } = EUnitFaction.Unknown;
 
-        private int cumulativeDamageTaken = 0;
-
         public void ApplyDamage(int damage, EDamageType damageType) {
-            this.cumulativeDamageTaken = 0;
+            int cumulativeDamageTaken = 0;
             foreach (var resolver in this.gameObject.GetComponents<IDamageResolver>()) {
-                resolver.ResolveDamage(damage, damageType, this);
+                cumulativeDamageTaken += resolver.ResolveDamage(damage, damageType, this);
             }
-            this.HitPoints -= Mathf.Max(0, this.cumulativeDamageTaken);
+            this.HitPoints -= Mathf.Max(0, cumulativeDamageTaken);
         }
 
-        public void ReportDamage(int damage) {
-            this.cumulativeDamageTaken += damage;
-        }
-
-        public void AddEffect(AbstractEffect effect) {
-        }
-
-        public void RemoveEffect(AbstractEffect effect) {
-        }
-
-        public void ApplyEffect(AbstractEffect newEffect) {
-            List<Tuple<AbstractEffect, EffectResolve>> listOfEffects = new List<Tuple<AbstractEffect, EffectResolve>>();
-            var activeEffects = gameObject.GetComponents<AbstractEffect>();
-            foreach (var effect in activeEffects) {
-                effect.ResolveEffectOutcome(newEffect);
+        public void ApplyEffect(IEffectResolver incomingEffect) {
+            Tuple<IEffectResolver, EffectResolveType, Type> selectedExistingEffect = new(null, EffectResolveType.Added, null);
+            foreach (var effect in this.gameObject.GetComponents<IEffectResolver>()) {
+                Tuple<EffectResolveType, Type> resolution = effect.ResolveEffects(incomingEffect);
+                if (resolution.Item1 >= selectedExistingEffect.Item2) {
+                    selectedExistingEffect = new(effect, resolution.Item1, resolution.Item2);
+                }
             }
-            if (listOfEffects.Count > 0) return; // not the real end -> effect needs to be added
-            listOfEffects.Sort(); // wont work :/
 
-            EffectResolve effectType = listOfEffects[0].Item2;
-            switch (effectType) {
-                case EffectResolve.Negated:
-                    // call negated() on all effects and newEffect
+            switch (selectedExistingEffect.Item2) {
+                case EffectResolveType.Negated_Without_Removal:
+                    Debug.Log("Effect negated without removal.");
                     break;
-                case EffectResolve.Joined:
-                    // call joined(newEffect) on all effects
+                case EffectResolveType.Negated:
+                    Debug.Log("Effect negated with removal.");
+                    Destroy(selectedExistingEffect.Item1 as MonoBehaviour);
                     break;
-                case EffectResolve.Added:
-                    // just add new newEffect to gameobject
+                case EffectResolveType.Joined:
+                    this.gameObject.AddComponent(selectedExistingEffect.Item3);
+                    Destroy(selectedExistingEffect.Item1 as MonoBehaviour);
+                    Destroy(incomingEffect as MonoBehaviour);
+                    break;
+                case EffectResolveType.Added:
+                    this.gameObject.AddComponent(incomingEffect.GetType());
                     break;
                 default:
                     Debug.LogWarning("Oh no, that's not a valid effect.");
@@ -59,5 +52,8 @@ namespace AutoBattleCoop {
             }
         }
 
+        public int ResolveDamage(int baseDamage, EDamageType damageType, AbstractUnit unit) {
+            return baseDamage;
+        }
     }
 }

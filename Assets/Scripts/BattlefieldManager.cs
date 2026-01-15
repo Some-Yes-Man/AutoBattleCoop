@@ -1,7 +1,8 @@
+using AutoBattleCoop;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace AutoBattleCoop {
+namespace Assets.Scripts {
     public class BattlefieldManager : MonoBehaviour {
 
         public static BattlefieldManager Instance;
