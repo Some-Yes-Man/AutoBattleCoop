@@ -1,7 +1,5 @@
-namespace AutoBattleCoop
-{
-    public enum EffectType
-    {
+namespace AutoBattleCoop {
+    public enum EffectType {
         Burning,
         Wet,
         Sad
