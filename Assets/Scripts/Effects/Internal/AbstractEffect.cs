@@ -1,8 +1,7 @@
-using AutoBattleCoop.Assets.Scripts.Effects;
 using System;
 using UnityEngine;
 
-namespace Assets.Scripts.Effects {
+namespace AutoBattleCoop.Assets.Scripts.Effects.Internal {
     public abstract class AbstractEffect : MonoBehaviour, IEffectResolver {
 
         private static readonly IEffectResolver staticResolver = new DummyEffectResolver();

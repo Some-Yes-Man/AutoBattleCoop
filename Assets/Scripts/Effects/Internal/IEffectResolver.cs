@@ -1,6 +1,6 @@
 using System;
 
-namespace AutoBattleCoop.Assets.Scripts.Effects {
+namespace AutoBattleCoop.Assets.Scripts.Effects.Internal {
     public interface IEffectResolver {
 
         EffectType Type { get; }

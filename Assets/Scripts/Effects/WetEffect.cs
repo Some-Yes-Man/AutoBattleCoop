@@ -1,4 +1,4 @@
-﻿using Assets.Scripts.Effects;
+﻿using AutoBattleCoop.Assets.Scripts.Effects.Internal;
 using System;
 
 namespace AutoBattleCoop.Assets.Scripts.Effects {

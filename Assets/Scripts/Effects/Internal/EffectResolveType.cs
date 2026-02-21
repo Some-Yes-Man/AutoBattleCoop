@@ -1,4 +1,4 @@
-namespace AutoBattleCoop.Assets.Scripts.Effects {
+namespace AutoBattleCoop.Assets.Scripts.Effects.Internal {
     public enum EffectResolveType {
         Negated_Without_Removal = 3,
         Negated = 2,

@@ -1,6 +1,5 @@
 ﻿using NUnit.Framework;
 using UnityEngine;
-using Assets.Scripts.Effects;
 using AutoBattleCoop.Assets.Scripts.Effects;
 
 namespace AutoBattleCoop {

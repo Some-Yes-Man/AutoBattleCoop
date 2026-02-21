@@ -1,4 +1,4 @@
-using AutoBattleCoop.Assets.Scripts.Effects;
+using AutoBattleCoop.Assets.Scripts.Effects.Internal;
 using System;
 using UnityEngine;
 
