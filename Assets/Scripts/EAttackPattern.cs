@@ -1,4 +1,4 @@
-namespace AutoBattleCoop {
+namespace AutoBattleCoop.Assets.Scripts {
     public enum EAttackPattern {
         Unknown = 0,
         Forward = 1,

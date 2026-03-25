@@ -1,9 +1,10 @@
+using AutoBattleCoop.Assets.Scripts.Damage;
 using AutoBattleCoop.Assets.Scripts.Effects.Internal;
 using System;
 using System.Linq;
 using UnityEngine;
 
-namespace AutoBattleCoop {
+namespace AutoBattleCoop.Assets.Scripts {
     public abstract class AbstractUnit : MonoBehaviour, IDamageResolver {
 
         [field: SerializeField]
@@ -14,12 +15,19 @@ namespace AutoBattleCoop {
 
         public EUnitFaction Faction { get; protected set; } = EUnitFaction.Unknown;
 
-        public void ApplyDamage(int damage, EDamageType damageType) {
+        public int ApplyDamage(int damage, EDamageType damageType) {
             int cumulativeDamageTaken = 0;
             foreach (var resolver in this.gameObject.GetComponents<IDamageResolver>()) {
                 cumulativeDamageTaken += resolver.ResolveDamage(damage, damageType, this);
             }
+
             this.HitPoints -= Mathf.Max(0, cumulativeDamageTaken);
+
+            return cumulativeDamageTaken;
+        }
+
+        public int ResolveDamage(int baseDamage, EDamageType damageType, AbstractUnit unit) {
+            return baseDamage;
         }
 
         public void ApplyEffect(IEffectResolver incomingEffect) {
@@ -65,8 +73,5 @@ namespace AutoBattleCoop {
             }
         }
 
-        public int ResolveDamage(int baseDamage, EDamageType damageType, AbstractUnit unit) {
-            return baseDamage;
-        }
     }
 }

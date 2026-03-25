@@ -1,15 +1,29 @@
+using AutoBattleCoop.Assets.Scripts.Damage;
 using AutoBattleCoop.Assets.Scripts.Effects.Internal;
 using System;
+using UnityEngine;
 
 namespace AutoBattleCoop.Assets.Scripts.Effects {
-    public class FrozenEffect : AbstractEffect {
+    public class FrozenEffect : AbstractEffect, IDamageResolver {
 
         public FrozenEffect() {
             Type = EffectType.Frozen;
         }
 
+        public int ResolveDamage(int baseDamage, EDamageType damageType, AbstractUnit unit) {
+            return damageType switch {
+                EDamageType.Physical => Mathf.RoundToInt(baseDamage * 1.0f),
+                EDamageType.Fire => Mathf.RoundToInt(baseDamage * -1.0f),
+                EDamageType.Lightning => Mathf.RoundToInt(baseDamage * 0.25f),
+                _ => 0,
+            };
+        }
+
         public override Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
-            return new(EffectResolveType.Added, null);
+            return incomingEffect.Type switch {
+                EffectType.Burning => new(EffectResolveType.Joined, typeof(WetEffect)),
+                _ => new(EffectResolveType.Added, null),
+            };
         }
 
     }

@@ -1,6 +1,7 @@
+using AutoBattleCoop.Assets.Scripts;
 using NUnit.Framework;
 
-namespace AutoBattleCoop {
+namespace Assets.Tests {
     public class PatternGeneratorTest {
 
         [Test]

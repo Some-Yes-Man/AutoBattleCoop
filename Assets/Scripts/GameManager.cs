@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AutoBattleCoop {
+namespace AutoBattleCoop.Assets.Scripts {
     public class GameManager : MonoBehaviour {
 
         public static GameManager Instance;

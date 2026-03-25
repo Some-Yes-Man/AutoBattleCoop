@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace AutoBattleCoop {
+namespace AutoBattleCoop.Assets.Scripts {
     public class PatternGenerator {
 
         protected PatternGenerator() { }

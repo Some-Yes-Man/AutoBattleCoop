@@ -1,7 +1,8 @@
+using AutoBattleCoop.Assets.Scripts;
 using NUnit.Framework;
 using UnityEngine;
 
-namespace AutoBattleCoop {
+namespace Assets.Tests {
     public class UnitManagerTest {
 
         [Test]

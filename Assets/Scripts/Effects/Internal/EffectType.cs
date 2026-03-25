@@ -4,6 +4,7 @@ namespace AutoBattleCoop.Assets.Scripts.Effects.Internal {
         Wet,
         Cold,
         Frozen,
+        Steam,
         _TestEffectBase,
         _TestEffectNegatedWithoutRemoval,
         _TestEffectNegated,

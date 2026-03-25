@@ -1,9 +1,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using Assets.Scripts;
 
-namespace AutoBattleCoop {
+namespace AutoBattleCoop.Assets.Scripts {
     // just holds units and informs the battlefieldManager if someone died after evaluation 
     public class UnitManager : MonoBehaviour {
 
