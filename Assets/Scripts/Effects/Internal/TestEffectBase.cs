@@ -5,20 +5,20 @@ namespace AutoBattleCoop.Assets.Scripts.Effects {
     public class TestEffectBase : AbstractEffect {
 
         public TestEffectBase() {
-            Type = EffectType._TestEffectBase;
+            Type = EEffectType._TestEffectBase;
         }
 
-        public override Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
-            if (incomingEffect.Type == EffectType._TestEffectNegatedWithoutRemoval) {
-                return new(EffectResolveType.Negated_Without_Removal, null);
+        public override Tuple<EEffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
+            if (incomingEffect.Type == EEffectType._TestEffectNegatedWithoutRemoval) {
+                return new(EEffectResolveType.Negated_Without_Removal, null);
             }
-            if (incomingEffect.Type == EffectType._TestEffectNegated) {
-                return new(EffectResolveType.Negated, null);
+            if (incomingEffect.Type == EEffectType._TestEffectNegated) {
+                return new(EEffectResolveType.Negated, null);
             }
-            if (incomingEffect.Type == EffectType._TestEffectJoined) {
-                return new(EffectResolveType.Joined, typeof(TestEffectJoinedResult));
+            if (incomingEffect.Type == EEffectType._TestEffectJoined) {
+                return new(EEffectResolveType.Joined, typeof(TestEffectJoinedResult));
             }
-            return new(EffectResolveType.Added, null);
+            return new(EEffectResolveType.Added, null);
         }
 
     }

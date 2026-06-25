@@ -5,11 +5,11 @@ namespace AutoBattleCoop.Assets.Scripts.Effects {
     public class TestEffectAdded : AbstractEffect {
 
         public TestEffectAdded() {
-            Type = EffectType._TestEffectAdded;
+            Type = EEffectType._TestEffectAdded;
         }
 
-        public override Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
-            return new(EffectResolveType.Added, null);
+        public override Tuple<EEffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
+            return new(EEffectResolveType.Added, null);
         }
 
     }

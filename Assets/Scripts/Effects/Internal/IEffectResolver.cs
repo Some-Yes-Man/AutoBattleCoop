@@ -3,14 +3,14 @@ using System;
 namespace AutoBattleCoop.Assets.Scripts.Effects.Internal {
     public interface IEffectResolver {
 
-        EffectType Type { get; }
+        EEffectType Type { get; }
 
         bool Active { get; }
 
         void Deactivate();
 
-        Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
-            return new(EffectResolveType.Added, null);
+        Tuple<EEffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
+            return new(EEffectResolveType.Added, null);
         }
 
     }

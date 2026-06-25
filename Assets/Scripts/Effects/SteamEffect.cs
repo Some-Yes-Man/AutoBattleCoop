@@ -7,7 +7,7 @@ namespace AutoBattleCoop.Assets.Scripts.Effects {
     public class SteamEffect : AbstractEffect, IDamageResolver {
 
         public SteamEffect() {
-            Type = EffectType.Steam;
+            Type = EEffectType.Steam;
         }
 
         public int ResolveDamage(int baseDamage, EDamageType damageType, AbstractUnit unit) {
@@ -18,8 +18,8 @@ namespace AutoBattleCoop.Assets.Scripts.Effects {
             };
         }
 
-        public override Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
-            return incomingEffect.Type switch { _ => new(EffectResolveType.Added, null) };
+        public override Tuple<EEffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
+            return incomingEffect.Type switch { _ => new(EEffectResolveType.Added, null) };
         }
 
     }

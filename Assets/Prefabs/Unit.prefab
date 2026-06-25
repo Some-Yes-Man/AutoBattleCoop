@@ -90,6 +90,7 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
+  m_MaskInteraction: 0
   m_AdditionalVertexStreams: {fileID: 0}
 --- !u!65 &7016076938778006570
 BoxCollider:
@@ -124,3 +125,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0bfd67e21af130740aeac092ed5efe4a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: '::'
+  <BaseMaxHitPoints>k__BackingField: 0
+  <HitPoints>k__BackingField: 0
+  <BaseInitiative>k__BackingField: 0
+  <Initiave>k__BackingField: 0

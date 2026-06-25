@@ -1,5 +1,5 @@
 namespace AutoBattleCoop.Assets.Scripts.Effects.Internal {
-    public enum EffectType {
+    public enum EEffectType {
         Burning,
         Wet,
         Cold,

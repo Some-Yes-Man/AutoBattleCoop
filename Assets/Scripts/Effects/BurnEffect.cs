@@ -7,7 +7,7 @@ namespace AutoBattleCoop.Assets.Scripts.Effects {
     public class BurnEffect : AbstractEffect, IDamageResolver {
 
         public BurnEffect() {
-            Type = EffectType.Burning;
+            Type = EEffectType.Burning;
         }
 
         public int ResolveDamage(int baseDamage, EDamageType damageType, AbstractUnit unit) {
@@ -17,12 +17,12 @@ namespace AutoBattleCoop.Assets.Scripts.Effects {
             };
         }
 
-        public override Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
+        public override Tuple<EEffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
             return incomingEffect.Type switch {
-                EffectType.Wet => new(EffectResolveType.Joined, typeof(SteamEffect)),
-                EffectType.Cold => new(EffectResolveType.Negated, null),
-                EffectType.Frozen => new(EffectResolveType.Joined, typeof(WetEffect)),
-                _ => new(EffectResolveType.Added, null),
+                EEffectType.Wet => new(EEffectResolveType.Joined, typeof(SteamEffect)),
+                EEffectType.Cold => new(EEffectResolveType.Negated, null),
+                EEffectType.Frozen => new(EEffectResolveType.Joined, typeof(WetEffect)),
+                _ => new(EEffectResolveType.Added, null),
             };
         }
 

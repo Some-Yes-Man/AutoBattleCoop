@@ -5,14 +5,14 @@ namespace AutoBattleCoop.Assets.Scripts.Effects {
     public class TestEffectNegated : AbstractEffect {
 
         public TestEffectNegated() {
-            Type = EffectType._TestEffectNegated;
+            Type = EEffectType._TestEffectNegated;
         }
 
-        public override Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
-            if (incomingEffect.Type == EffectType._TestEffectBase) {
-                return new(EffectResolveType.Negated, null);
+        public override Tuple<EEffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
+            if (incomingEffect.Type == EEffectType._TestEffectBase) {
+                return new(EEffectResolveType.Negated, null);
             }
-            return new(EffectResolveType.Added, null);
+            return new(EEffectResolveType.Added, null);
         }
 
     }

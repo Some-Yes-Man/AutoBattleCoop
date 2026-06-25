@@ -5,14 +5,14 @@ namespace AutoBattleCoop.Assets.Scripts.Effects {
     public class TestEffectJoined : AbstractEffect {
 
         public TestEffectJoined() {
-            Type = EffectType._TestEffectJoined;
+            Type = EEffectType._TestEffectJoined;
         }
 
-        public override Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
-            if (incomingEffect.Type == EffectType._TestEffectBase) {
-                return new(EffectResolveType.Joined, typeof(TestEffectJoinedResult));
+        public override Tuple<EEffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
+            if (incomingEffect.Type == EEffectType._TestEffectBase) {
+                return new(EEffectResolveType.Joined, typeof(TestEffectJoinedResult));
             }
-            return new(EffectResolveType.Added, null);
+            return new(EEffectResolveType.Added, null);
         }
 
     }

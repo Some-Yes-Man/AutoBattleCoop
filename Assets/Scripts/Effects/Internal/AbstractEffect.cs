@@ -10,7 +10,7 @@ namespace AutoBattleCoop.Assets.Scripts.Effects.Internal {
         public string Name { get; protected set; }
 
         [field: SerializeField]
-        public EffectType Type { get; protected set; }
+        public EEffectType Type { get; protected set; }
 
         [field: SerializeField]
         public bool Active { get; protected set; }
@@ -23,7 +23,7 @@ namespace AutoBattleCoop.Assets.Scripts.Effects.Internal {
             Active = false;
         }
 
-        public virtual Tuple<EffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
+        public virtual Tuple<EEffectResolveType, Type> ResolveEffects(IEffectResolver incomingEffect) {
             return staticResolver.ResolveEffects(incomingEffect);
         }
 
